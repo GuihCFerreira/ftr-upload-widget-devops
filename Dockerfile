@@ -24,7 +24,7 @@ RUN pnpm build
 # Remove development dependencies to reduce the image size
 RUN pnpm prune --prod
 
-FROM node:20-alpine3.21 AS deploy
+FROM cgr.dev/chainguard/node:latest AS deploy
 
 # Use a non-root user for security
 USER 1000 
@@ -45,4 +45,4 @@ ENV CLOUDFLARE_PUBLIC_URL="http://localhost:8080"
 EXPOSE 3333
 
 # Start the application
-CMD ["node", "dist/server.mjs"]
+CMD ["dist/server.mjs"]
