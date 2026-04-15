@@ -32,9 +32,8 @@ jobs:
 
       - name: Build and push image to Docker Hub
         id: build-push-image
-        env:
-          DOCKERHUB_REPOSITORY: ${{ vars.DOCKERHUB_REPOSITORY }}
-          IMAGE_TAG: ${{ steps.generate-image-tag.outputs.sha }}
-        run: |
-          docker build -t $DOCKERHUB_REPOSITORY:$IMAGE_TAG .
-          docker push $DOCKERHUB_REPOSITORY:$IMAGE_TAG
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ vars.DOCKERHUB_REPOSITORY }}:${{ steps.generate-image-tag.outputs.sha }}
