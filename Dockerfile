@@ -1,6 +1,6 @@
 FROM node:20.18 AS base
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9
 
 FROM base AS dependencies
 
@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm install --frozen-lockfile --prod=false
+RUN pnpm install --frozen-lockfile
 
 FROM base AS build
 
