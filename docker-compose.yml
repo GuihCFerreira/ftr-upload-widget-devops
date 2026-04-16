@@ -11,7 +11,15 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: widget-server
     volumes:
-      - db-data:/var/lib/postgresql/data # Persist data in a named volume
+      - db-data:/var/lib/postgresql # Postgres 18+ stores data in a version-specific subdirectory
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d widget-server"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - widget
 
   app:
     build: .
@@ -24,6 +32,16 @@ services:
       - CLOUDFLARE_BUCKET=#
       - CLOUDFLARE_ACCOUNT_ID=#
       - CLOUDFLARE_PUBLIC_URL=http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    
+    networks:
+      - widget
 
 volumes:
   db-data:
+
+networks:
+  widget:
+    driver: bridge
