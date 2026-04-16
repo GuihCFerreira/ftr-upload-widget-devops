@@ -1,0 +1,13 @@
+name: widget-server-devops-pipeline
+services:
+  app:
+    build: .
+    container_name: widget-server-devops
+    ports:
+      - 3000:3333 # Expose port 3333 from the container to port 3000 on the host
+    environment:
+      - CLOUDFLARE_ACCESS_KEY_ID=#
+      - CLOUDFLARE_SECRET_ACCESS_KEY=#
+      - CLOUDFLARE_BUCKET=#
+      - CLOUDFLARE_ACCOUNT_ID=#
+      - CLOUDFLARE_PUBLIC_URL=http://localhost:3000
