@@ -1,8 +1,19 @@
 name: widget-server-devops-pipeline
 services:
+  
+  db:
+    image: postgres:latest
+    container_name: widget-server-db-devops
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: widget-server
+
   app:
     build: .
-    container_name: widget-server-devops
+    container_name: widget-server-app-devops
     ports:
       - 3000:3333 # Expose port 3333 from the container to port 3000 on the host
     environment:
