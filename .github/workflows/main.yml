@@ -30,6 +30,7 @@ jobs:
 
       - name: Install dependencies
         id: install-dependencies
+        working-directory: ./server
         run: |
           pnpm install
 
