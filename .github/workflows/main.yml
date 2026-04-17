@@ -59,7 +59,8 @@ jobs:
         id: build-image-for-scanning
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./server
+          file: ./server/Dockerfile
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -79,7 +80,8 @@ jobs:
         id: build-push-image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./server
+          file: ./server/Dockerfile
           push: true
           cache-from: type=gha
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ vars.AWS_ECR_REPOSITORY }}:${{ steps.generate-image-tag.outputs.sha }}
