@@ -1,6 +1,5 @@
 import * as aws from "@pulumi/aws";
 
-// Create an AWS resource (S3 Bucket)
 const bucket = new aws.s3.Bucket("primeiro-bucket", {
   tags: {
     IAC: "true",
@@ -15,7 +14,6 @@ const ecr = new aws.ecr.Repository("primeiro-ecr", {
   },
 });
 
-// Export the name of the bucket
 export const bucketName = bucket.id;
 export const bucketRegion = bucket.region;
 export const bucketArn = bucket.arn;
