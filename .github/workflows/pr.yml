@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  update:
+  preview:
     runs-on: ubuntu-latest
     steps:
 
@@ -47,7 +47,7 @@ jobs:
         uses: pulumi/actions@v6
         with:
           command: preview
-          stack-name: widget-server-iac/stg
+          stack-name: ${{ vars.PULUMI_STACK_NAME }}
           work-dir: ./iac
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
