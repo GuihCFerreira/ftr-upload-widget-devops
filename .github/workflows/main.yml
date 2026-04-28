@@ -98,7 +98,7 @@ jobs:
           memory : 2
           port: ${{ vars.AWS_APP_RUNNER_SERVICE_PORT }}
           access-role-arn: ${{ secrets.AWS_APP_RUNNER_ACCESS_ROLE_ARN }}
-          wait-for-service-stability-seconds: 180
+          wait-for-service-stability-seconds: 300
     
       - name: App Runner Check
         id: app-runner-check
