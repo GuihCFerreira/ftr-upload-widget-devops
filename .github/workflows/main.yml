@@ -32,7 +32,7 @@ jobs:
         id: install-dependencies
         working-directory: ./server
         run: |
-          pnpm install
+          pnpm install --no-frozen-lockfile
 
       - name: Configure AWS Credentials
         id: configure-aws-credentials
